@@ -3,7 +3,14 @@ QQ登录功能
 
 ### 使用时需注意修改以下地方
 **1**\
-application.yml中qq.oauth.http的值修改为QQ互联中填写的网站地址
+application.yml中
+
+```java
+qq:
+  oauth:
+    http: #QQ互联中填写的网站地址
+```
+
 
 **2**\
 QQHttpClient中
