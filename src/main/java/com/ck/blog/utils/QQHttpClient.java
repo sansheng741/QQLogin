@@ -13,12 +13,13 @@ import java.io.IOException;
 /**
  * @author ck
  * @create 2019-05-18 20:32
+ * QQ工具类（主要用于解析QQ返回的信息）
  */
 public class QQHttpClient {
+    //QQ互联中提供的 appid 和 appkey
+    public static final String APPID = "xxxxxxxx";
 
-    public static final String APPID = "101581466";
-
-    public static final String APPKEY = "6169bc6e4ed0704cdff86f3a4bad4549";
+    public static final String APPKEY = "xxxxxxxxxx";
 
 
     private static JSONObject parseJSONP(String jsonp){
@@ -29,7 +30,7 @@ public class QQHttpClient {
 
         return JSONObject.parseObject(json);
     }
-
+    //qq返回信息：access_token=FE04************************CCE2&expires_in=7776000&refresh_token=88E4************************BE14
     public static String getAccessToken(String url) throws IOException {
         CloseableHttpClient client = HttpClients.createDefault();
         String token = null;
@@ -54,7 +55,7 @@ public class QQHttpClient {
         httpGet.releaseConnection();
         return token;
     }
-
+    //qq返回信息：callback( {"client_id":"YOUR_APPID","openid":"YOUR_OPENID"} ); 需要用到上面自己定义的解析方法parseJSONP
     public static String getOpenID(String url) throws IOException {
         JSONObject jsonObject = null;
         CloseableHttpClient client = HttpClients.createDefault();
@@ -77,6 +78,7 @@ public class QQHttpClient {
         }
     }
 
+    //qq返回信息：{ "ret":0, "msg":"", "nickname":"YOUR_NICK_NAME", ... }，为JSON格式，直接使用JSONObject对象解析
     public static JSONObject getUserInfo(String url) throws IOException {
         JSONObject jsonObject = null;
         CloseableHttpClient client = HttpClients.createDefault();

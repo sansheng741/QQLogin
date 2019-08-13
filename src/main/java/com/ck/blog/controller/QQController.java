@@ -30,7 +30,7 @@ public class QQController {
      */
     @GetMapping("/qq/oauth")
     public String qq(HttpSession session){
-        //http://www.sansheng2019.cn/qq/callback 回调地址
+        //QQ互联中的回调地址
         String backUrl = http + "/qq/callback";
 
         //用于第三方应用防止CSRF攻击
@@ -54,7 +54,7 @@ public class QQController {
     @GetMapping("/qq/callback")
     public String qqcallback(HttpServletRequest request) throws Exception {
         HttpSession session = request.getSession();
-
+        //qq返回的信息：http://graph.qq.com/demo/index.jsp?code=9A5F************************06AF&state=test
         String code = request.getParameter("code");
         String state = request.getParameter("state");
         String uuid = (String) session.getAttribute("state");
@@ -88,9 +88,9 @@ public class QQController {
         JSONObject jsonObject = QQHttpClient.getUserInfo(url);
 
         //也可以放到Redis和mysql中
-        session.setAttribute("openid",openid);
-        session.setAttribute("nickname",(String)jsonObject.get("nickname"));
-        session.setAttribute("figureurl_qq_2",(String)jsonObject.get("figureurl_qq_2"));
+        session.setAttribute("openid",openid);  //openid,用来唯一标识qq用户
+        session.setAttribute("nickname",(String)jsonObject.get("nickname")); //QQ名
+        session.setAttribute("figureurl_qq_2",(String)jsonObject.get("figureurl_qq_2")); //大小为100*100像素的QQ头像URL
 
 
         return "redirect:/home";

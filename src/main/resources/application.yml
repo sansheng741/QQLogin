@@ -3,4 +3,4 @@ server:
 
 qq:
   oauth:
-    http: http://www.sansheng2019.cn
+    http: #QQ互联中填写的网站地址
