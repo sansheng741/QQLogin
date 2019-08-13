@@ -1,0 +1,6 @@
+server:
+  port: 80
+
+qq:
+  oauth:
+    http: http://www.sansheng2019.cn
